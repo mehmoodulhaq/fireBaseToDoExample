@@ -2,7 +2,7 @@
 
 (function () {
     'use strict';
-    angular.module('toDoApp',['firebase'])
+    angular.module('toDoApp',[])
         .factory('toDoService',['$timeout','$q',function($timeout,$q){
             var mainRef = new Firebase('https://mfirstapp.firebaseio.com/');
             var toDoListRef = mainRef.child('toDo');
@@ -95,6 +95,10 @@
                         console.log(err)
                     })
 
+            };
+            $scope.cancelEditItem = function( item, local ){
+                item.title = local.cached;
+                local.editState = !local.editState;
             }
 
         }])

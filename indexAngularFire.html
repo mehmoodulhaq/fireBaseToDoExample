@@ -6,8 +6,7 @@
     <script src="lib/firebase.js"></script>
     <script src="lib/angular.min.js"></script>
     <script src="lib/angularfire.min.js"></script>
-    <script src="app.js"></script>
-
+    <script src="appAngularFire.js"></script>
 
 </head>
 <body ng-app="toDoApp">
@@ -20,14 +19,14 @@
     </form>
     <ul>
         <li ng-repeat="listItem in myList">
-            <div ng-init="local = { editState : false, cached : listItem.title }">
+            <div ng-init="local = { editState : false, cached : listItem.$value }">
                 <div ng-if="!local.editState">
-                    <span ng-bind="listItem.title"></span>
+                    <span ng-bind="listItem.$value"></span>
                     <span><input type="button" value="Edit" ng-click="$parent.local.editState = !$parent.local.editState"/></span>
                     <span><input type="button" value="Remove" ng-click="removeItem(listItem, $index )"/></span>
                 </div>
                 <div ng-if="local.editState">
-                    <span><input type="text" ng-model="listItem.title"/></span>
+                    <span><input type="text" ng-model="listItem.$value"/></span>
                     <span><input type="button" value="Save" ng-click="editItem(listItem, $index, $parent.local)"/> </span>
                     <span><input type="button" value="Cancel" ng-click="cancelEditItem(listItem, $parent.local)"/></span>
                 </div>
