@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Firebase TODO Example</title>
+    <script src="lib/firebase.js"></script>
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/angularfire.min.js"></script>
+    <script src="app.js"></script>
+
+</head>
+<body ng-app="toDoApp">
+<div>
+<h1>Firebase ToDo Example</h1>
+    <ul ng-controller="toDoCtrl">
+        <li ng-repeat="items in myList">
+            {{items.title}}
+        </li>
+    </ul>
+<h3>Messages</h3>
+</div>
+</body>
+</html>
