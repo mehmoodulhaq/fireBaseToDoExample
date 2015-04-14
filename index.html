@@ -13,15 +13,23 @@
 <div  ng-controller="toDoCtrl">
 
 <h1>Firebase ToDo Example</h1>
-
     <form ng-submit="addItem()">
-    <input type="text" ng-model="title" placeholder="Title"/>
-    <input type="submit" value="Add Item" />
+        <input type="text" ng-model="title" placeholder="Title"/>
+        <input type="submit" value="Add Item" />
     </form>
-        <ul>
+    <ul>
         <li ng-repeat="listItem in myList">
-            <span ng-bind="listItem.title"></span>
-            <span><input type="button" value="Remove" ng-click="removeItem(listItem, $index )"/> </span><!--zen coding-->
+            <div ng-init="editState =false">
+                <div ng-if="!editState">
+                    <span ng-bind="listItem.title"></span>
+                    <span><input type="button" value="Edit" ng-click="$parent.editState = !$parent.editState"/></span>
+                    <span><input type="button" value="Remove" ng-click="removeItem(listItem, $index )"/></span>
+                </div>
+                <div ng-if="editState">
+                    <span><input type="text" ng-model="listItem.title"/></span>
+                    <span><input type="button" value="Save" ng-click="editItem(listItem, $index,$parent)"/> </span>
+                </div>
+            </div>
         </li>
     </ul>
 </div>

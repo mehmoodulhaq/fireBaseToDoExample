@@ -43,6 +43,28 @@
                         });
 
                     return promise.promise;
+                },
+                editItem:function(item){
+                    var promise = $q.defer();
+
+                    var obj = {};
+                    obj[item.$id]= item.title;
+
+                   /* toDoListRef
+                        .update(obj,function (err) {*/
+                    toDoListRef.child(item.$id)
+                        .set(item.title,function (err) {
+                            if(err) {
+                                console.log(err);
+                                promise.reject(err)
+                            }
+                            else{
+                                console.log('Item edited!');
+                                promise.resolve('Item edited')
+                            }
+                        });
+                    return promise.promise;
+
                 }
 
             }
@@ -61,6 +83,18 @@
                     .catch(function (err) {
                         console.log(err)
                     })
+            };
+            $scope.editItem = function(item,index,pScope){
+                debugger;
+                toDoService.editItem(item)
+                    .then(function(res){
+                        //$scope.myList[index] = res;
+                        pScope.editState = !pScope.editState;
+                    })
+                    .catch(function (err) {
+                        console.log(err)
+                    })
+
             }
 
         }])
